@@ -387,6 +387,14 @@ module.exports = function(webpackEnv) {
                 compact: isEnvProduction,
               },
             },
+            {
+              test: /\.(ttf|eot|woff|woff2|otf|svg)/,
+              loader: require.resolve('file-loader'),
+              options: {
+                limit: 10000,
+                name: 'static/font/[name].[hash:8].[ext]',
+              },
+            },
             // Process any JS outside of the app with Babel.
             // Unlike the application JS, we only compile the standard ES features.
             {

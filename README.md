@@ -14,3 +14,6 @@ yarn
 ```
 yarn start
 ```
+
+
+> 特别感谢 https://github.com/foliojs/pdfkit 提供的支持

@@ -17,11 +17,27 @@ const getImage = async (uri) => {
     })
   })
 }
+
+const getFont = async (uri) => {
+  return new Promise((resolve,reject) => {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', uri, true);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = () => {
+      if(xhr.status === 200) {
+        resolve(xhr.response)
+      } else {
+        reject(new Error(xhr.responseText))
+      }
+    }
+    xhr.send()
+  })
+}
 class App extends Component {
   componentDidMount() {
     const doc = new PDFDocument();
     const stream = doc.pipe(blobStream())
-    Pdf(doc, getImage)
+    Pdf(doc, getImage, getFont)
     // end and display the document in the iframe to the right
     const iframe = this.refs.iframe
     stream.on('finish', function() {
