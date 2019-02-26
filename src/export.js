@@ -27,19 +27,19 @@ const fn = async () => {
 
 
     // keywords
-      console.log('00000');
+
       const doc = new PDFDocument();
       doc.pipe(fs.createWriteStream('file.pdf'))
+      // doc.pipe(fs.createReadStream(path.relative(__dirname,'../file.pdf')))
       /**
        ******************************************************************
        */
-      doc.fontSize(25).text('Here ilslkfs some vector graphics...', 100, 80);
+      doc.fontSize(25).text('Here ilslkfs some vector graphics...', 100, 180);
       const image = await getImage('https://wechat-pics.fangpinduo.com/image/property/53094231/13940383_0_1.jpg')
       console.log(image,'fffff');
       doc.image(image,100,100,{height:100,width:100})
       .text('And here is some wrapped text...', 100, 300)
       
-      // end and display the document in the iframe to the right
       doc.end();
       
       /**
