@@ -1,40 +1,44 @@
 const path = require('path')
 const HummusRecipe = require('hummus-recipe');
+const Pdf = require('./assets/js/Pdf')
+const Jimp = require('jimp')
+const Atlanta = require('./reports/Atlanta')
+const {toThousandFix,toThousandPrt} = require('./utils')
+
+const getImage = async (uri) => {
+  const res = await Jimp.read(uri)
+  return new Promise((resolve,reject) => {
+    res.getBuffer(Jimp.MIME_PNG,(err, re) => {
+      if(err) {
+        reject(err)
+      } else {
+        resolve(re)
+      }
+    })
+  })
+}
 const fn = async () => {
   try{
-    
-      const doc = new HummusRecipe(path.resolve(__dirname,'City_Report_Sample.pdf'), 'output.pdf');
-      doc.registerFont('PMingLiU',path.resolve(__dirname,'./assets/font/PMingLiU.ttf'))
-      const pageSize = doc.metadata['1']['size']
-      const pageNumber = doc.metadata['pages']
-      const textBoxSize = [pageSize[0],150]
+      const doc = new HummusRecipe(path.resolve(__dirname,'Atlanta_data_report-sample.pdf'), 'output.pdf');
+      // 添加水印
+      // const text = 'SAMPLE'
+      // const pdf = new Pdf()
+      // pdf.waterMark(doc,text)
+      // const pageNumber = doc.metadata['pages']
+      doc.registerFont('PingFangSC-Regular',path.resolve(__dirname,'./assets/font/PingFangSC-Regular.ttf'))
+      doc.registerFont('PingFangSC-Semibold',path.resolve(__dirname,'./assets/font/PingFangSC-Semibold.ttf'))
+      doc.registerFont('PingFangSC-Medium',path.resolve(__dirname,'./assets/font/PingFangSC-Medium.ttf'))
+      // 
+      // const image = await getImage('https://wechat-pics.fangpinduo.com/image/property/53094231/13940383_0_1.jpg')
+      const atlanta = new Atlanta(doc)
+      atlanta.editPdf(2019)
 
 
-      function editPage(pageIndex) {
-        doc
-        .editPage(pageIndex+1)
-        .text('SAMPLE', (pageSize[0] - textBoxSize[0])/2, (pageSize[1] - textBoxSize[1])/2,{
-          // font: 'PMingLiU',
-          color: '#000000',
-          opacity: 0.1,
-          rotation: 30,
-          rotationOrigin: [pageSize[0]/2,pageSize[1]/2],
-          size: textBoxSize[1],
-          textBox: {
-            textAlign:'center',
-            width: textBoxSize[0],
-            height: textBoxSize[1]
-          }
-        })
-        .endPage()
-        return doc
-      }
-      for (let index = 0; index < pageNumber; index++) {
-       editPage(index)
-      }
+
+
+
 
       doc.endPDF()
-    
   } catch (err) {
     console.log(err);
   }

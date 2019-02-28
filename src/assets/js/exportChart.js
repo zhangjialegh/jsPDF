@@ -1,126 +1,100 @@
 const node_echarts = require('node-echarts');
 const path = require('path')
+const LineOption = require('./LineCharts')
+const BarOption = require('./BarCharts')
+const PieOption = require('./PieCharts')
 
-const option = {
-  title: {
-      text: '堆叠区域',
-      textStyle: {
-          fontWeight: '400',
-          fontSize: 18,
-          lineHeight: '30'
-      },
-      subtextStyle: {
-          color:'#666',
-          fontSize: 14
-      },
-      subtext:'labels'
-  },
-  legend: {
-      data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
-  },
-  grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-  },
-  xAxis : [
-      {
-          type : 'category',
-          boundaryGap : false,
-          axisTick:{
-              show:false
-          },
-          data : ['周一','周二','周三','周四','周五','周六','周日']
-      }
-  ],
-  yAxis : [
-      {
-          type : 'value',
-          axisTick:{
-              show:false
-          },
-      }
-  ],
-  series : [
-      {
-          name:'邮件营销',
-          type:'line',
-          stack: '总量',
-          areaStyle: {},
-          lineStyle:{
-              width:1
-          },
-          smooth:true,
-          showSymbol:false,
-          data:[120, 132, 101, 134, 90, 230, 210]
-      },
-      {
-          name:'联盟广告',
-          type:'line',
-          lineStyle:{
-              width:1
-          },
-          stack: '总量',
-          areaStyle: {},
-          smooth:true,
-          showSymbol:false,
-          data:[220, 182, 191, 234, 290, 330, 310]
-      },
-      {
-          name:'视频广告',
-          lineStyle:{
-              width:1
-          },
-          type:'line',
-          stack: '总量',
-          areaStyle: {},
-          smooth:true,
-          showSymbol:false,
-          data:[150, 232, 201, 154, 190, 330, 410]
-      },
-      {
-          name:'直接访问',
-          lineStyle:{
-              width:1
-          },
-          type:'line',
-          stack: '总量',
-          smooth:true,
-          showSymbol:false,
-          areaStyle: {normal: {}},
-          data:[320, 332, 301, 334, 390, 330, 320]
-      },
-      {
-          name:'搜索引擎',
-          type:'line',
-          lineStyle:{
-              width:1
-          },
-          stack: '总量',
-          smooth:true,
-          showSymbol:false,
-          label: {
-              normal: {
-                  show: true,
-                  position: 'top'
-              }
-          },
-          areaStyle: {normal: {}},
-          data:[820, 932, 901, 934, 1290, 1330, 1320]
-      }
-  ]
-};
+const Line = new LineOption()
+const Bar = new BarOption()
+const Pie = new PieOption()
 
-
-
-const config = {
-    width: 700, // Image width, type is number.
-    height: 500, // Image height, type is number.
-    option, // Echarts configuration, type is Object.
-    //If the path  is not set, return the Buffer of image.
-    path:  path.resolve('download','1.png'), // Path is filepath of the image which will be created.
-    enableAutoDispose: true  //Enable auto-dispose echarts after the image is created.
+/**
+ *   * :(800*500)   ** : (1200*500)
+ * 
+ * 
+ * line_median_listing_price_single                 // 挂牌中位价(每年)*
+ * line_median_sale_price_single                    // 成交中位价(每年)*
+ * line_days_on_market_single                       // 整体成交周期(每年)*
+ * line_rental_price_single                         // 租金(每年)*
+ * line_rental_return_single                        // 租金回报率(每年)*
+ * line_inventory_amount_single                     // 库存(每年)*
+ * line_median_listing_price_perennial              // 挂牌中位价(历史)**
+ * line_inventory_amount_perennial                  // 库存(历史)**
+ * line_rental_price_perennial                      // 租金(历史) **
+ * line_days_on_market_perennial                    // 整体成交周期(历史)**
+ * 
+ * multiline_median_diff_style_perennial            // 不同户型成交中位价(历史)**
+ * multiline_rental_diff_style_perennial            // 不同户型租金(历史) **
+ * multiline_market_diff_style_perennial            // 不同户型成交周期(历史)**
+ * 
+ * pie_vacancy_rate                                 // 空置率*
+ * pie_house_style                                  // 房源类别 *
+ * pie_lease_own                                    // 租赁或自有 *
+ * 
+ * multibar_rental_renturn_perennial    //不同户型租金回报率(历史)**
+ */
+const name = {
+    a: 'line_median_listing_price_single',              
+    b: 'line_median_sale_price_single',
+    c: 'line_days_on_market_single',
+    d: 'line_rental_price_single',
+    e: 'line_rental_return_single',
+    f: 'line_inventory_amount_single',
+    g: 'line_median_listing_price_perennial',
+    h: 'line_inventory_amount_perennial',
+    i: 'line_rental_price_perennial',
+    j: 'line_days_on_market_perennial',
+    k: 'multiline_median_diff_style_perennial',
+    l: 'multiline_rental_diff_style_perennial',
+    m: 'multiline_market_diff_style_perennial',
+    n: 'pie_vacancy_rate',
+    o: 'pie_house_style',
+    p: 'pie_lease_own',
+    q: 'multibar_rental_renturn_perennial'
 }
+const size = {
+    small: {
+        width: 800,
+        height: 500
+    },
+    large: {
+        width: 1200,
+        height: 500
+    }
+}
+const arrOption = [
+    {
+        name: 'line',
+        option: Line.outSimpleLineOption(),
+        ...size.small
+    },
+    {
+        name: 'multibar',
+        option: Bar.outMultiBarOption(),
+        ...size.large
+    },
+    {
+        name: 'pie',
+        option: Pie.outSimplePieOption(),
+        ...size.small
+    },
+    {
+        name: 'multiline',
+        option: Line.outMultiLineOption(),
+        ...size.large
+    }
+]
 
-node_echarts(config)
+
+
+arrOption.forEach((item) => {
+    const config = {
+        width: item.width, // Image width, type is number.
+        height: item.height, // Image height, type is number.
+        option: item.option, // Echarts configuration, type is Object.
+        //If the path  is not set, return the Buffer of image.
+        path:  path.resolve(__dirname,`../images/${item.name}.png`), // Path is filepath of the image which will be created.
+        enableAutoDispose: true  //Enable auto_dispose echarts after the image is created.
+    }
+    node_echarts(config)
+})
