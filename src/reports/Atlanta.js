@@ -9,21 +9,35 @@ class Atlanta {
   }
 
   // 涨跌显示效果处理
-  indexNumber (string,x,y,index=1) {
+  indexNumber (ratio,x,y1,y2,status=1,text) {
+    // this.indexNumber(element['ratio'],x,y1,y2,element['status'],text)
     const doc = this.doc
     doc
-    .text( string,x,y,{
+    .text( ratio,x,y1,{
       font:'PingFangSC-Medium',
       size: 20,
-      color: index ? '#d0121b' : '#2aa738',
+      color: status ? '#d0121b' : '#2aa738',
       textBox: {
         width: 73,
         height: 20
       }
     })
-    .image(path.resolve(__dirname,`../assets/images/pub/${index ? 'up' : 'down'}.png`),x+73,y,{
-      height: 16
+    .text(text,x,y2,{
+      font:'PingFangSC-Regular',
+      size: 10,
+      color: '#3e3a3a',
+      textBox: {
+        width: 104,
+        lineHeight: 12
+      }
     })
+    
+    if(status>-1) {
+      doc
+      .image(path.resolve(__dirname,`../assets/images/pub/${status ? 'up' : 'down'}.png`),x+73,y1,{
+        height: 16
+      })
+    }
   }
 
   // 表格渲染逻辑
@@ -190,7 +204,7 @@ class Atlanta {
         doc
         .endPage()
   }
-  editPage8() {
+  editPage8({year,month,priceTrendOne,priceTrendTwo}) {
     const doc = this.doc
     // page 8
     doc.editPage(8)
@@ -215,43 +229,46 @@ class Atlanta {
     //   width: 116,
     //   height: 76.5
     // })
-    this.indexNumber('99.99%',196.299,313.799,1)
+
+    for (let index = 0; index < priceTrendOne.length; index++) {
+      const element = priceTrendOne[index];
+      let text = '',x=0,y1=0,y2=0,trend=''
+      switch (element['status']) {
+        case -1:
+          trend=''
+          break;
+        case 0:
+          trend='下跌'
+          break;
+        case 1:
+          trend='增长'
+          break;
+      }
+      switch (index) {
+        case 0:
+          text = `${year}年\n房价${trend}${element['ratio']}`
+          x = 196.299
+          y1 = 313.799
+          y2 = 340
+          break;
+        case 1:
+          text = `${year}年\n租金收益率${trend}${element['ratio']}`
+          x = 320.588
+          y1 = 313.799
+          y2 = 340
+          break;
+        case 2:
+          text = `${year+1}年\n预计房价${trend}${element['ratio']}`
+          x = 442.218
+          y1 = 313.799
+          y2 = 340
+          break;
+      }
+      this.indexNumber(element['ratio'],x,y1,y2,element['status'],text)
+    }
 
     doc
-    .text('2018年\n房价增长10.12%',196.299,340,{
-      font:'PingFangSC-Regular',
-      size: 10,
-      color: '#3e3a3a',
-      textBox: {
-        width: 104,
-        lineHeight: 12
-      }
-    })
-    this.indexNumber('99.99%',320.588,313.799,0)
-
-    doc
-    .text('2018年\n房价增长10.12%',320.588,340,{
-      font:'PingFangSC-Regular',
-      size: 10,
-      color: '#3e3a3a',
-      textBox: {
-        width: 104,
-        lineHeight: 12
-      }
-    })
-    this.indexNumber('99.99%',442.218,313.799,1)
-
-    doc
-    .text('2018年\n房价增长10.12%',442.218,340,{
-      font:'PingFangSC-Regular',
-      size: 10,
-      color: '#3e3a3a',
-      textBox: {
-        width: 104,
-        lineHeight: 12
-      }
-    })
-    .text('2018年房价',182.268,400.582,{
+    .text(`${year}年${month}月房价`,182.268,400.582,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a'
@@ -261,7 +278,7 @@ class Atlanta {
       size: 10,
       color: '#9fa0a0'
     })
-    .text('$23.0万',275.24,464.503,{
+    .text(priceTrendTwo['listing'][0],275.24,464.503,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -272,7 +289,7 @@ class Atlanta {
         lineHeight:15
       }
     })
-    .text('$23.0万',365.24,464.503,{
+    .text(priceTrendTwo['listing'][1],365.24,464.503,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -283,7 +300,7 @@ class Atlanta {
         lineHeight:15
       }
     })
-    .text('$23.0万',455.24,464.503,{
+    .text(priceTrendTwo['listing'][2],455.24,464.503,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -294,7 +311,7 @@ class Atlanta {
         lineHeight:15
       }
     })
-    .text('$23.0万',275.24,494,{
+    .text(priceTrendTwo['closing'][0],275.24,494,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -305,7 +322,7 @@ class Atlanta {
         lineHeight:15
       }
     })
-    .text('$23.0万',365.24,494,{
+    .text(priceTrendTwo['closing'][1],365.24,494,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -316,7 +333,7 @@ class Atlanta {
         lineHeight:15
       }
     })
-    .text('$23.0万',455.24,494,{
+    .text(priceTrendTwo['closing'][2],455.24,494,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -327,7 +344,7 @@ class Atlanta {
         lineHeight:15
       }
     })
-    .text('2018年租金',182.268,555.921,{
+    .text(`${year}年${month}月租金`,182.268,555.921,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a'
@@ -337,7 +354,7 @@ class Atlanta {
       size: 10,
       color: '#9fa0a0'
     })
-    .text('$23.0万',275.24,618.661,{
+    .text(priceTrendTwo['rental'][0],275.24,618.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -348,7 +365,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',365.24,618.661,{
+    .text(priceTrendTwo['rental'][1],365.24,618.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -359,7 +376,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',455.24,618.661,{
+    .text(priceTrendTwo['rental'][2],455.24,618.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -370,7 +387,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',275.24,692.661,{
+    .text(priceTrendTwo['longRent'][0],275.24,692.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -381,7 +398,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',365.24,692.661,{
+    .text(priceTrendTwo['longRent'][1],365.24,692.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -392,7 +409,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',455.24,692.661,{
+    .text(priceTrendTwo['longRent'][2],455.24,692.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -403,7 +420,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',275.24,722.661,{
+    .text(priceTrendTwo['shortRent'][0],275.24,722.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -414,7 +431,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',365.24,722.661,{
+    .text(priceTrendTwo['shortRent'][1],365.24,722.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -425,7 +442,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',455.24,722.661,{
+    .text(priceTrendTwo['shortRent'][2],455.24,722.661,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -438,7 +455,7 @@ class Atlanta {
     })
     .endPage()
   }
-  editPage9() {
+  editPage9({month,listingOne,listingTwo}) {
     const doc = this.doc
     // page 9
     doc
@@ -448,46 +465,32 @@ class Atlanta {
       height: 122,
       keepAspectRatio: false
     })
-    this.indexNumber('99.9%',198.927,320.315,1)
 
+    for (let index = 0; index < listingOne.length; index++) {
+      const element = listingOne[index];
+      let x=0,y1=0,y2=0
+      switch (index) {
+        case 0:
+          x = 198.927
+          y1 = 320.315
+          y2 = 350.035
+          break;
+        case 1:
+          x = 320.588
+          y1 = 320.315
+          y2 = 350.035
+          break;
+        case 2:
+          x = 442.218
+          y1 = 320.315
+          y2 = 350.035
+          break;
+      
+    }
+    this.indexNumber(element['ratio'],x,y1,y2,element['status'],element['text'])
+  }
     doc
-    .text('2007年- 2012年下跌34%',198.927,350.035,{
-      font:'PingFangSC-Regular',
-      size: 10,
-      color: '#3e3a3a',
-      textBox: {
-        width: 86,
-        height: 24,
-        lineHeight: 12
-      }
-    })
-    this.indexNumber('7.25%',320.588,320.315,1)
-    
-    doc
-    .text('2018年\n房价增长10.12%',320.588,350.035,{
-      font:'PingFangSC-Regular',
-      size: 10,
-      color: '#3e3a3a',
-      textBox: {
-        width: 104,
-        height: 24,
-        lineHeight: 12
-      }
-    })
-    this.indexNumber('7.25%',442.218,320.315,0)
-
-    doc
-    .text('2018年\n房价增长10.12%',442.218,350.035,{
-      font:'PingFangSC-Regular',
-      size: 10,
-      color: '#3e3a3a',
-      textBox: {
-        width: 104,
-        height: 24,
-        lineHeight: 12
-      }
-    })
-    .text('12月房价',182.252,428.313,{
+    .text(`${month}月房价`,182.252,428.313,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#000000',
@@ -498,7 +501,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',275.24,428.313,{
+    .text(listingTwo['price'][0],275.24,428.313,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -509,7 +512,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',365.24,428.313,{
+    .text(listingTwo['price'][1],365.24,428.313,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -520,7 +523,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',455.24,428.313,{
+    .text(listingTwo['price'][2],455.24,428.313,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -531,7 +534,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('12月租金',182.252,499.291,{
+    .text(`${month}月租金`,182.252,499.291,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#000000',
@@ -542,7 +545,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',275.24,499.291,{
+    .text(listingTwo['rental'][0],275.24,499.291,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -553,7 +556,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',365.24,499.291,{
+    .text(listingTwo['rental'][1],365.24,499.291,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -564,7 +567,7 @@ class Atlanta {
         lineHeight:16
       }
     })
-    .text('$23.0万',455.24,499.291,{
+    .text(listingTwo['rental'][2],455.24,499.291,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -624,7 +627,7 @@ class Atlanta {
     doc
     .endPage()
   }
-  editPage12() {
+  editPage12({rentalTwo}) {
     const doc = this.doc
     // page 12
     doc.editPage(12)
@@ -683,7 +686,7 @@ class Atlanta {
         lineHeight:18
       }
     })
-    .text('$23.0万',182.252+58,493.362,{
+    .text(rentalTwo['median'][0],182.252+58,493.362,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -694,7 +697,7 @@ class Atlanta {
         lineHeight:18
       }
     })
-    .text('$23.0万',182.252+58+75,493.362,{
+    .text(rentalTwo['median'][1],182.252+58+75,493.362,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -705,7 +708,7 @@ class Atlanta {
         lineHeight:18
       }
     })
-    .text('$23.0万',182.252+58+75+75,493.362,{
+    .text(rentalTwo['median'][2],182.252+58+75+75,493.362,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -716,7 +719,7 @@ class Atlanta {
         lineHeight:18
       }
     })
-    .text('$23.0万',182.252+58+75+75+75,493.362,{
+    .text(rentalTwo['median'][3],182.252+58+75+75+75,493.362,{
       font:'PingFangSC-Regular',
       size: 10,
       color: '#3e3a3a',
@@ -760,13 +763,13 @@ class Atlanta {
   }
   
  
-  editPdf({page7,page10,page13}) {
+  editPdf({page7,page8,page9,page10,page11,page12,page13}) {
     this.editPage7(page7)          
-    this.editPage8()
-    this.editPage9()
+    this.editPage8(page8)
+    this.editPage9(page9)
     this.editPage10(page10)
-    this.editPage11()
-    this.editPage12()
+    this.editPage11(page11)
+    this.editPage12(page12)
     this.editPage13(page13)
   }
 }
