@@ -1,3 +1,6 @@
+const echarts = require('echarts')
+const {toThousandFix,toThousandPrt} = require('../../utils')
+const {dataType,dateType} = require('../../config')
 class BarOption {
   constructor() {
 
@@ -5,7 +8,7 @@ class BarOption {
   outSimpleBarOption() {
       return 
   }
-  outMultiBarOption() {
+  outMultiBarOption(data,type,xType=dateType['m']) {
       return {
           legend: {
               icon:'rect',
@@ -14,7 +17,8 @@ class BarOption {
               itemGap: 15,
               textStyle: {
                   padding: 5,
-                  fontSize: 22
+                  fontSize: 22,
+                  color: '#9fa0a0'
               }
           },
           grid: {
@@ -24,14 +28,16 @@ class BarOption {
           },
           dataset: {
               source: [
-                  ['product', '所有户型', '小户型', '中户型','大户型'],
-                  ['Latte', 43.3, 85.8, 93.7,87],
-                  ['Tea', 83.1, 73.4, 55.1,87],
-                  ['Cocoa', 86.4, 65.2, 82.5,87],
-                  ['Browni', 72.4, 53.9, 39.1,87],
-                  ['Browne', 72.4, 53.9, 39.1,87],
-                  ['Broie', 72.4, 53.9, 39.1,87],
-                  ['Broe', 72.4, 53.9, 39.1,87]
+                  ['product', '所有户型', '大户型', '中户型','小户型'],
+                  ...data.map((item) => {
+                    return [
+                      item.date,
+                      item.all,
+                      item.large,
+                      item.medium,
+                      item.small
+                    ]
+                  })
               ]
           },
           xAxis: {
@@ -44,7 +50,23 @@ class BarOption {
               },
               axisLabel: {
                   color: '#9fa0a0',
-                  fontSize: 22
+                  fontSize: 22,
+                  formatter: function (val) {
+                    let text = ''
+                    const arr = val.split('-')
+                    switch (xType) {
+                      case dateType['m']:
+                        text = Number(arr[1])+'月'
+                        break;
+                      case dateType['y']:
+                        text = Number(arr[0])+'年'
+                        break;
+                      case dateType['d']:
+                        text = Number(arr[2])+'日'
+                        break;
+                    }
+                    return text
+                  }
               },
               axisLine: {
                   show:false
@@ -59,7 +81,31 @@ class BarOption {
               },
               axisLabel: {
                   color: '#9fa0a0',
-                  fontSize: 22
+                  fontSize: 22,
+                  formatter: function(val) {
+                    let text = ''
+                    switch (type) {
+                      case dataType['day']:
+                        text = val ? (val+'天') : ''
+                        break;
+                      case dataType['dollar']:
+                        const dol = val / 1000
+                        if(dol < 0.1) {
+                          text = ''
+                        } else if(dol>=1) {
+                          text = '$'+toThousandFix(dol,0) +'k'
+                        } else {
+                          text = '$'+toThousandFix(dol,1) +'k'
+                        }
+                        break;
+                      case dataType['ratio']:
+                        const r = val >= 1 ? val : val * 100
+                        text = r<0.1 ? '' : (toThousandPrt(r,1)+'%')
+                        break;
+                    }
+                    
+                    return text
+                  }
               },
               axisLine: {
                   show:false

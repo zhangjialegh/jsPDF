@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import blobStream from 'blob-stream'
 import PDFDocument from 'pdfkit'
 import Jimp from 'jimp'
-import {Pdf} from './pdf'
+import {Pdf} from './dev-pdf-template'
 
 const getImage = async (uri) => {
   const res = await Jimp.read(uri)

@@ -2009,3 +2009,7 @@
 [ 27/02/2019 10:55:28 ] PDFWriter::EndPDF, Could not end PDF
 [ 27/02/2019 10:56:45 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 1884 was not registered as written. probably means it was not written
 [ 27/02/2019 10:56:45 ] PDFWriter::EndPDF, Could not end PDF
+[ 28/02/2019 17:21:14 ] InputFile::OpenFile, Unexpected Failure. Cannot open file for reading - /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/images/multibar_rental_renturn_perennial.png
+[ 28/02/2019 17:21:14 ] InputFile::OpenFile, Unexpected Failure. Cannot open file for reading - /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/images/multibar_rental_renturn_perennial.png
+[ 28/02/2019 17:21:15 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 2136 was not registered as written. probably means it was not written
+[ 28/02/2019 17:21:15 ] PDFWriter::EndPDF, Could not end PDF

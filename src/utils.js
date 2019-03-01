@@ -19,7 +19,7 @@ const toThousandFix = (num, dot = 2) => {
 };
 
 const toThousandPrt = (value, dot=2) => {
-  return value ? (value * 100).toFixed(dot) : "0";
+  return value ? (value * 1).toFixed(dot) : "0";
 };
 
 module.exports = {

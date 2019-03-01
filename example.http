@@ -1,11 +1,11 @@
-GET https://wechat.fangpinduo.com/api/get_countries HTTP/1.1
+#GET https://wechat.fangpinduo.com/api/get_countries HTTP/1.1
 
 
 #GET https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx3c36a7bbdf1f0793&secret=f726f017e1ca93e90313a3369e2d133c HTTP/1.1
 
-#POST https://api.weixin.qq.com/wxa/getwxacode?access_token=18_EqTMZCmURrrxq5CNnIbaRGwC4Hddkwq6sOiPR5MsiHnlZgpP8JRVUv7I9bv-rckk_g_VX6YhaGh9CU8u7njSFri3IGF-dr-k31Wvi9v68zlb47ajzFs134t3IDJAqd3GEviHzey93R_29Jf7NMBeAJAUTI HTTP/1.1
-# Content-Type: application/json
+POST https://api.weixin.qq.com/wxa/getwxacode?access_token=19_bviYl-qnDmIKFNufoRpA9nyJ0ulb7LURj10TuBSF_aZiYnFucOp2JUz0iA2LqNNOJY0CUpYN5KyR7q5g-xYk9liRklc4NWSHxEhTrgZCVdhSel94uTTirsDSfQQTOGiAIAAVN HTTP/1.1
+Content-Type: application/json
 
-# {
-#    "path":"pages/home/home"
-# }
+{
+   "path":"pages/home/home"
+}

@@ -2,18 +2,35 @@
 
 - 本地开发热更新PDF视图
 - Node服务端自动导出PDF文件
-- 语法规则查看 src/guide.pdf
 
 
 ## 使用
 ```
-yarn
+yarn start
 ```
 
 ### 本地开发
 ```
+# 开发一个新的PDF模板
 yarn start
+
+# 生成一个新的PDF模板
+yarn new
+
+# 在images输出报告图表
+yarn outcharts
+
+# 根目录导出报告PDF
+yarn out
 ```
 
 
-> 特别感谢 https://github.com/foliojs/pdfkit 提供的支持
+
+> issue:
+
+- *开发模式报错*
+```
+./node_modules/pdfkit/js/pdfkit.es5.js
+SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (1:0)
+```
+将该文件删除后可正常工作
