@@ -9,8 +9,10 @@ class LineOption {
       return {
         grid: {
           top:30,
-          right: '3%',
-          left: '10%'
+          right: '2%',
+          left: '0%',
+          bottom:'2%',
+          containLabel: true
         },
         xAxis: {
             type: 'category',
@@ -29,7 +31,7 @@ class LineOption {
             },
             axisLabel: {
                 color: '#9fa0a0',
-                fontSize: 22,
+                fontSize: 26,
                 formatter: function (val) {
                   let text = ''
                   const arr = val.split('-')
@@ -43,6 +45,9 @@ class LineOption {
                       break;
                     case dateType['d']:
                       text = Number(arr[2])+'日'
+                      break;
+                    case dateType['my']:
+                      text = arr[1]+'/'+arr[0]
                       break;
                   }
                   return text
@@ -59,7 +64,8 @@ class LineOption {
             },
             axisLabel: {
                 color: '#9fa0a0',
-                fontSize: 22,
+                fontSize: 26,
+                margin: 25,
                 formatter: function(val) {
                   let text = ''
                   switch (type) {
@@ -126,7 +132,7 @@ class LineOption {
             itemGap: 15,
             textStyle: {
                 padding: 5,
-                fontSize: 22,
+                fontSize: 26,
                 color: '#9fa0a0'
             },
             formatter: function(name){
@@ -136,8 +142,8 @@ class LineOption {
             data:['0','1','2','3']
         },
         grid: {
-            left: '4%',
-            right: '3%',
+            left: '0%',
+            right: '2%',
             bottom: '2%',
             containLabel: true
         },
@@ -153,7 +159,7 @@ class LineOption {
                 },
                 axisLabel: {
                     color: '#9fa0a0',
-                    fontSize: 22,
+                    fontSize: 26,
                     formatter: function (val) {
                       let text = ''
                       const arr = val.split('-')
@@ -167,6 +173,9 @@ class LineOption {
                           break;
                         case dateType['d']:
                           text = Number(arr[2])+'日'
+                          break;
+                        case dateType['my']:
+                          text = arr[1]+'/'+arr[0]
                           break;
                       }
                       return text
@@ -188,7 +197,8 @@ class LineOption {
                 },
                 axisLabel: {
                     color: '#9fa0a0',
-                    fontSize: 22,
+                    fontSize: 26,
+                    margin: 25,
                     formatter: function(val) {
                       let text = ''
                       switch (type) {

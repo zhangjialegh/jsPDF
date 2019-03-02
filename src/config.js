@@ -63,6 +63,7 @@ const dateType = {
   m:'month',
   y:'year',
   d:'day',
+  my:'my',
   ymd: 'ymd'
 }
 

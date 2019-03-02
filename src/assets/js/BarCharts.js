@@ -17,14 +17,16 @@ class BarOption {
               itemGap: 15,
               textStyle: {
                   padding: 5,
-                  fontSize: 22,
+                  fontSize: 26,
                   color: '#9fa0a0'
               }
           },
           grid: {
               top:30,
               right: 0,
-              left: '5%'
+              left: '0%',
+              bottom: '2%',
+              containLabel: true,
           },
           dataset: {
               source: [
@@ -50,7 +52,7 @@ class BarOption {
               },
               axisLabel: {
                   color: '#9fa0a0',
-                  fontSize: 22,
+                  fontSize: 26,
                   formatter: function (val) {
                     let text = ''
                     const arr = val.split('-')
@@ -63,6 +65,9 @@ class BarOption {
                         break;
                       case dateType['d']:
                         text = Number(arr[2])+'日'
+                        break;
+                      case dateType['my']:
+                        text = arr[1]+'/'+arr[0]
                         break;
                     }
                     return text
@@ -81,7 +86,7 @@ class BarOption {
               },
               axisLabel: {
                   color: '#9fa0a0',
-                  fontSize: 22,
+                  fontSize: 26,
                   formatter: function(val) {
                     let text = ''
                     switch (type) {

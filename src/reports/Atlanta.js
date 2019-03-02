@@ -742,7 +742,7 @@ class Atlanta {
     })
     .image(path.resolve(__dirname,`../assets/images/${name['q']}.png`),184.082,612.403,{
       width: 358.294,
-      height: 151.763,
+      height: 140,
       keepAspectRatio: false
     })
     this.descRender(196.673,519.658,dataDesc['page12'][0]['content'],dataDesc['page12'][0]['showDot'])

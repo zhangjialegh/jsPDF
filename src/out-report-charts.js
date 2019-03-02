@@ -73,12 +73,12 @@ const arrOption = [
 
     {
         name: name['g'],
-        option: Line.outSimpleLineOption(listings,dataType['dollar'],dateType['ymd']),
+        option: Line.outSimpleLineOption(listings,dataType['dollar'],dateType['my']),
         ...size.large
     },
     {
         name: name['h'],
-        option: Line.outSimpleLineOption(inventory_data,dataType['dollar'],dateType['ymd']),
+        option: Line.outSimpleLineOption(inventory_data,dataType['dollar'],dateType['my']),
         ...size.large
     },
     {
@@ -88,7 +88,7 @@ const arrOption = [
                 date:item.date,
                 all: item.all
             }
-        }),dataType['dollar'],dateType['ymd']),
+        }),dataType['dollar'],dateType['my']),
         ...size.large
     },
     {
@@ -98,22 +98,22 @@ const arrOption = [
                 date:item.date,
                 all: item.all
             }
-        }),dataType['day'],dateType['ymd']),
+        }),dataType['day'],dateType['my']),
         ...size.large
     },
     {
         name: name['k'],
-        option: Line.outMultiLineOption(close_prices,dataType['dollar'],dateType['ymd']),
+        option: Line.outMultiLineOption(close_prices,dataType['dollar'],dateType['my']),
         ...Object.assign(size.large,{height:700})
     },
     {
         name: name['l'],
-        option: Line.outMultiLineOption(rent_all,dataType['dollar'],dateType['ymd']),
+        option: Line.outMultiLineOption(rent_all,dataType['dollar'],dateType['my']),
         ...size.large
     },
     {
         name: name['m'],
-        option: Line.outMultiLineOption(dom_all,dataType['day'],dateType['ymd']),
+        option: Line.outMultiLineOption(dom_all,dataType['day'],dateType['my']),
         ...size.large
     },
     {
