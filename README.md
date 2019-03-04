@@ -4,20 +4,18 @@
 - Node服务端自动导出PDF文件
 
 
-## 使用
+## 开始使用
 ```
-yarn start
-```
-
-### 本地开发
-```
-# 开发一个新的PDF模板
+# 开发一个新的PDF文档
 yarn start
 
-# 生成一个新的PDF模板
+# 生成一个新的PDF文档
 yarn new
 
-# 在images输出报告图表
+# 给PDF文档添加水印
+yarn mark <optional>(watermark text)
+
+# 根据数据生成图表
 yarn outcharts
 
 # 根目录导出报告PDF
@@ -28,7 +26,7 @@ yarn out
 
 > issue:
 
-- *开发模式报错*
+- *如果开发模式报错*
 ```
 ./node_modules/pdfkit/js/pdfkit.es5.js
 SyntaxError: 'import' and 'export' may appear only with 'sourceType: module' (1:0)
