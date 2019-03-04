@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const {saveFile,clearFile} = require('./assets/js/file')
+const {saveFile,clearFile} = require('./assets/js/File')
 const PDFDocument = require('pdfkit')
 const Jimp = require('jimp')
 

@@ -18,7 +18,7 @@ const getImage = async (uri) => {
   })
 }
 
-const getFont = async (uri) => {
+const getFont = (uri) => {
   return new Promise((resolve,reject) => {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', uri, true);

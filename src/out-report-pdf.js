@@ -2,36 +2,31 @@ const path = require('path')
 const fs = require('fs')
 const parse = require("csv-parse/lib/sync")
 const HummusRecipe = require('hummus-recipe');
-const Jimp = require('jimp')
-const Atlanta = require('./reports/Atlanta')
+const Report = require('./reports/Report')
 const {toThousandFix,toThousandPrt} = require('./utils')
-console.log('Pending...');
-const getImage = async (uri) => {
-  const res = await Jimp.read(uri)
-  return new Promise((resolve,reject) => {
-    res.getBuffer(Jimp.MIME_PNG,(err, re) => {
-      if(err) {
-        reject(err)
-      } else {
-        resolve(re)
-      }
-    })
-  })
-}
+
+console.log('Editing...');
+
+let entryName = 'Atlanta_data_report-sample.pdf'  //引入模板名称
+let outName = 'Atlanta_data_report.pdf'         //导出PDF名称
+
 const fn = async () => {
   try{
-      const doc = new HummusRecipe(path.resolve(__dirname,'Atlanta_data_report-sample.pdf'), 'Atlanta_data_report.pdf');
-      // const pageNumber = doc.metadata['pages']
-      // const image = await getImage('https://wechat-pics.fangpinduo.com/image/property/53094231/13940383_0_1.jpg')
-
+      const doc = new HummusRecipe(path.resolve(__dirname,entryName), outName);
+      // 自定义字体
       doc.registerFont('PingFangSC-Regular',path.resolve(__dirname,'./assets/font/PingFangSC-Regular.ttf'))
       doc.registerFont('PingFangSC-Semibold',path.resolve(__dirname,'./assets/font/PingFangSC-Semibold.ttf'))
       doc.registerFont('PingFangSC-Medium',path.resolve(__dirname,'./assets/font/PingFangSC-Medium.ttf'))
       
+      /**
+       * @参数定义
+       * status=> 0: 下跌  1:增长(默认)  -1:无 
+       */
+
       // page7 page8
       const year = 2018
       const month = 12
-      // page8
+      // page8     
       const priceTrendOne = [
         {
           status: 1,
@@ -86,8 +81,10 @@ const fn = async () => {
       const data1=fs.readFileSync(path.resolve(__dirname,'./data/campare_around.csv'))
       const campare_around = parse(data1,{columns:true})
       
-      const atlanta = new Atlanta(doc)
-      atlanta.editPdf({
+
+      // 编辑PDF逻辑从这里开始
+      const report = new Report(doc)
+      report.editPdf({
         page7: {
           year
         },
@@ -137,11 +134,6 @@ const fn = async () => {
           })
         }
       })
-
-
-
-
-
 
       doc.endPDF()
   } catch (err) {
