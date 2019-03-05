@@ -5,13 +5,17 @@ export const Pdf = async (doc, getImage, getFont) => {
 
   doc
   .fontSize(25).text('Here is some vector graphics...', 100, 80);
-  const image = await getImage(require('./assets/images/2.png'))
+  const image = await getImage(require('./assets/images/pub/down.png'))
+  console.log(image,'image');
   
   doc
   .addPage()
-  .image(image,100,100,{height:100,width:100})
-  .font('PingFangSC-Regular')
+  .image(image)
   .text('And here is some wrapped text...', 100, 300)
   .font('PingFangSC-Regular')
   .text('禹卫书法行书简体.')
+
+
+
+  doc.end()
 }
