@@ -2,8 +2,9 @@ const path = require('path')
 const {name,dataDesc} = require('../config')
 
 class Report {
-  constructor(doc) {
+  constructor(doc,initPage=1) {
     this.doc = doc
+    this.initPage = initPage
   }
 
   // 涨跌显示效果处理
@@ -112,7 +113,7 @@ class Report {
   editPage7({year}) {
     const doc = this.doc
     // page 7
-    doc.editPage(7)
+    doc.editPage(this.initPage)
         .text(`${year}年 - 挂牌中位价`,184.082,126.921,{    //第一行
           font:'PingFangSC-Regular',
           size: 12,
@@ -205,7 +206,7 @@ class Report {
   editPage8({year,month,priceTrendOne,priceTrendTwo}) {
     const doc = this.doc
     // page 8
-    doc.editPage(8)
+    doc.editPage(this.initPage+1)
     // .text('2,233,455',275,127.842,{
     //   font:'PingFangSC-Medium',
     //   size: 24,
@@ -457,7 +458,7 @@ class Report {
     const doc = this.doc
     // page 9
     doc
-    .editPage(9)
+    .editPage(this.initPage+2)
     .image(path.resolve(__dirname,`../assets/images/${name['g']}.png`),184.252,174.247,{
       width: 358,
       height: 122,
@@ -589,7 +590,7 @@ class Report {
     const self = this
     // page 10
     doc
-    .editPage(10)
+    .editPage(this.initPage+3)
     .image(path.resolve(__dirname,`../assets/images/${name['k']}.png`),184.252,171.968,{
         width: 366.378,
         height: 180.402,
@@ -603,7 +604,7 @@ class Report {
   editPage11() {
     const doc = this.doc
     // page 11
-    doc.editPage(11)
+    doc.editPage(this.initPage+4)
     .image(path.resolve(__dirname,`../assets/images/${name['j']}.png`),184.082,153.516,{
       width: 358.294,
       height: 127.378,
@@ -628,7 +629,7 @@ class Report {
   editPage12({rentalTwo}) {
     const doc = this.doc
     // page 12
-    doc.editPage(12)
+    doc.editPage(this.initPage+5)
     .text('当前租金',182.252+58,466.323,{
       font:'PingFangSC-Regular',
       size: 10,
@@ -753,7 +754,7 @@ class Report {
     const doc = this.doc
     const self = this
     doc
-    .editPage(13)
+    .editPage(this.initPage+6)
     for (let i = 0; i < campare_around.length; i++) {
       self.tableColumn4(439.882,24,[campare_around[i]['title'],campare_around[i]['atl'],campare_around[i]['mar'],campare_around[i]['alp']],i,38,'left',25)
     }

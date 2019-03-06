@@ -1,22 +1,35 @@
 const path = require('path')
 const fs = require('fs')
 const parse = require("csv-parse/lib/sync")
+const process = require('process')
 const HummusRecipe = require('hummus-recipe');
 const Report = require('./reports/Report')
 const {toThousandFix,toThousandPrt} = require('./utils')
 
-console.log('Editing...');
+// 原型添加inserPage方法
+HummusRecipe.prototype.insertPageWeHome = function(src,arr,toIndex=0) {
+  arr.forEach((item) => {
+    const bool = Array.isArray(item)
+    if(bool) {
+      const min = Math.min(...item)
+      const max = Math.max(...item)
+      for (let i = min; i < max+1; i++) {
+        this.insertPage(toIndex,src,i)
+      }
+    } else {
+      this.insertPage(toIndex,src,item)
+    }
+  })
+  return this
+}
 
-let entryName = 'Atlanta_data_report-sample.pdf'  //引入模板名称
-let outName = 'Atlanta_data_report.pdf'         //导出PDF名称
-
-const fn = async () => {
+// 编辑pdf函数主体
+function editPageBody() {
   try{
-      const doc = new HummusRecipe(path.resolve(__dirname,entryName), outName);
       // 自定义字体
-      doc.registerFont('PingFangSC-Regular',path.resolve(__dirname,'./assets/font/PingFangSC-Regular.ttf'))
-      doc.registerFont('PingFangSC-Semibold',path.resolve(__dirname,'./assets/font/PingFangSC-Semibold.ttf'))
-      doc.registerFont('PingFangSC-Medium',path.resolve(__dirname,'./assets/font/PingFangSC-Medium.ttf'))
+      this.registerFont('PingFangSC-Regular',path.resolve(__dirname,'./assets/font/PingFangSC-Regular.ttf'))
+      this.registerFont('PingFangSC-Semibold',path.resolve(__dirname,'./assets/font/PingFangSC-Semibold.ttf'))
+      this.registerFont('PingFangSC-Medium',path.resolve(__dirname,'./assets/font/PingFangSC-Medium.ttf'))
       
       /**
        * @参数定义
@@ -83,7 +96,7 @@ const fn = async () => {
       
 
       // 编辑PDF逻辑从这里开始
-      const report = new Report(doc)
+      const report = new Report(this)
       report.editPdf({
         page7: {
           year
@@ -134,11 +147,23 @@ const fn = async () => {
           })
         }
       })
-
-      doc.endPDF()
+      return this
   } catch (err) {
     console.log(err);
   }
 }
 
-fn()
+console.log('Processing...');
+
+const text = process.argv[2] || 'WeHome_report'  //导出文件名称
+let entryName = 'Templet.pdf'  //引入模板
+let outName = `${text}.pdf`         //导出PDF名称
+const longPDF = path.resolve(__dirname,'./Atlanta_data_report-sample.pdf')  //需要更新等pdf源文件
+const doc = new HummusRecipe(path.resolve(__dirname,entryName), outName);
+
+
+editPageBody.call(doc)
+.insertPageWeHome(longPDF,[[1,6]])  //将原文件前几页插入
+.insertPageWeHome(longPDF,[[14,16]],7)  //将原文件后几页插入
+.endPDF()
+

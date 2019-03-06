@@ -69,8 +69,6 @@ const arrOption = [
         option: Line.outSimpleLineOption(inventory_2018,dataType['dollar']),
         ...size.small
     },
-
-
     {
         name: name['g'],
         option: Line.outSimpleLineOption(listings,dataType['dollar'],dateType['my']),

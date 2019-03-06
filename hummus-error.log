@@ -2461,3 +2461,7 @@
 [ 04/03/2019 12:02:48 ] FreeTypeFaceWrapper::GetGlyphsForUnicodeText, failed to find glyph for charachter 0x6837
 [ 04/03/2019 12:02:48 ] FreeTypeFaceWrapper::GetGlyphsForUnicodeText, failed to find glyph for charachter 0x54c1
 [ 04/03/2019 12:02:48 ] AbstractContextContext::WriteTextCommandWithEncoding, was unable to find glyphs for all characters, some will appear as missing
+[ 06/03/2019 14:09:34 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 543 was not registered as written. probably means it was not written
+[ 06/03/2019 14:09:34 ] PDFWriter::EndPDF, Could not end PDF
+[ 06/03/2019 14:11:16 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 472 was not registered as written. probably means it was not written
+[ 06/03/2019 14:11:16 ] PDFWriter::EndPDF, Could not end PDF

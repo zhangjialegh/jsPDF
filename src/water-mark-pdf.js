@@ -5,7 +5,6 @@ const Pdf = require('./assets/js/Pdf')
 
 // 添加水印的文本
 const text = process.argv[2] || 'SAMPLE'
-console.log(process.argv[2],text);
 
 // 需要添加水印的文档名称以及导出文档的名称
 let entryName = 'Atlanta_data_report-sample.pdf'

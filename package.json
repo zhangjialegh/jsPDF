@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "mark":"node ./src/water-mark-pdf.js",
-    "new":"node ./src/create-new-pdf.js",
-    "outcharts":"node ./src/out-report-charts.js",
-    "outpdf":"node ./src/out-report-pdf.js",
-    "out":"yarn outcharts && yarn outpdf"
+    "mark": "node ./src/water-mark-pdf.js",
+    "new": "node ./src/create-new-pdf.js",
+    "outcharts": "node ./src/out-report-charts.js",
+    "outpdf": "node ./src/out-report-pdf.js",
+    "out": "yarn outcharts && yarn outpdf"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +33,7 @@
     "brfs": "^2.0.1",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "css-loader": "1.0.0",
+    "csv-parse": "^4.3.3",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
     "eslint": "5.12.0",

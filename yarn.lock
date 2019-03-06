@@ -3116,6 +3116,10 @@ cssstyle@^1.0.0:
   dependencies:
     cssom "0.3.x"
 
+csv-parse@^4.3.3:
+  version "4.3.3"
+  resolved "http://registry.npm.taobao.org/csv-parse/download/csv-parse-4.3.3.tgz#7aa120da34ce1a9d911fbb89c2ae313dcdaf7324"
+
 cyclist@~0.2.2:
   version "0.2.2"
   resolved "http://registry.npm.taobao.org/cyclist/download/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
