@@ -1,5 +1,5 @@
 const path = require('path')
-const {name,dataDesc} = require('../config')
+const {name,dataDesc} = require('../../config')
 
 class Report {
   constructor(doc,initPage=1) {
@@ -33,7 +33,7 @@ class Report {
     
     if(status>-1) {
       doc
-      .image(path.resolve(__dirname,`../assets/images/pub/${status ? 'up' : 'down'}.png`),x+73,y1,{
+      .image(path.resolve(__dirname,`../images/pub/${status ? 'up' : 'down'}.png`),x+73,y1,{
         height: 16
       })
     }
@@ -124,7 +124,7 @@ class Report {
           size: 10,
           color: '#9fa0a0'
         })
-        .image(path.resolve(__dirname,`../assets/images/${name['a']}.png`),184.082,172.851,{
+        .image(path.resolve(__dirname,`../images/${name['a']}.png`),184.082,172.851,{
           width: 173,
           height: 97
         })
@@ -138,7 +138,7 @@ class Report {
           size: 10,
           color: '#9fa0a0'
         })
-        .image(path.resolve(__dirname,`../assets/images/${name['b']}.png`),378,172.851,{
+        .image(path.resolve(__dirname,`../images/${name['b']}.png`),378,172.851,{
           width: 173,
           height: 97
         })
@@ -152,7 +152,7 @@ class Report {
           size: 10,
           color: '#9fa0a0'
         })
-        .image(path.resolve(__dirname,`../assets/images/${name['c']}.png`),184.082,338.85,{
+        .image(path.resolve(__dirname,`../images/${name['c']}.png`),184.082,338.85,{
           width: 173,
           height: 97
         })
@@ -166,7 +166,7 @@ class Report {
           size: 10,
           color: '#9fa0a0'
         })
-        .image(path.resolve(__dirname,`../assets/images/${name['d']}.png`),378,338.85,{
+        .image(path.resolve(__dirname,`../images/${name['d']}.png`),378,338.85,{
           width: 173,
           height: 97
         })
@@ -180,7 +180,7 @@ class Report {
           size: 10,
           color: '#9fa0a0'
         })
-        .image(path.resolve(__dirname,`../assets/images/${name['e']}.png`),184.082,504.819,{
+        .image(path.resolve(__dirname,`../images/${name['e']}.png`),184.082,504.819,{
           width: 173,
           height: 97
         })
@@ -194,7 +194,7 @@ class Report {
           size: 10,
           color: '#9fa0a0'
         })
-        .image(path.resolve(__dirname,`../assets/images/${name['f']}.png`),378,504.819,{
+        .image(path.resolve(__dirname,`../images/${name['f']}.png`),378,504.819,{
           width: 173,
           height: 97
         })
@@ -216,15 +216,15 @@ class Report {
     //     height: 36.85
     //   }
     // })
-    // .image(path.resolve(__dirname,'../assets/images/pie.png'),182.986,182.065,{
+    // .image(path.resolve(__dirname,'../images/pie.png'),182.986,182.065,{
     //   width: 116,
     //   height: 76.5
     // })
-    // .image(path.resolve(__dirname,'../assets/images/pie.png'),308.462,182.065,{
+    // .image(path.resolve(__dirname,'../images/pie.png'),308.462,182.065,{
     //   width: 116,
     //   height: 76.5
     // })
-    // .image(path.resolve(__dirname,'../assets/images/pie.png'),433.701,182.065,{
+    // .image(path.resolve(__dirname,'../images/pie.png'),433.701,182.065,{
     //   width: 116,
     //   height: 76.5
     // })
@@ -459,7 +459,7 @@ class Report {
     // page 9
     doc
     .editPage(this.initPage+2)
-    .image(path.resolve(__dirname,`../assets/images/${name['g']}.png`),184.252,174.247,{
+    .image(path.resolve(__dirname,`../images/${name['g']}.png`),184.252,174.247,{
       width: 358,
       height: 122,
       keepAspectRatio: false
@@ -591,7 +591,7 @@ class Report {
     // page 10
     doc
     .editPage(this.initPage+3)
-    .image(path.resolve(__dirname,`../assets/images/${name['k']}.png`),184.252,171.968,{
+    .image(path.resolve(__dirname,`../images/${name['k']}.png`),184.252,171.968,{
         width: 366.378,
         height: 180.402,
         keepAspectRatio: false
@@ -605,17 +605,17 @@ class Report {
     const doc = this.doc
     // page 11
     doc.editPage(this.initPage+4)
-    .image(path.resolve(__dirname,`../assets/images/${name['j']}.png`),184.082,153.516,{
+    .image(path.resolve(__dirname,`../images/${name['j']}.png`),184.082,153.516,{
       width: 358.294,
       height: 127.378,
       keepAspectRatio: false
     })
-    .image(path.resolve(__dirname,`../assets/images/${name['m']}.png`),184.082,321.858,{
+    .image(path.resolve(__dirname,`../images/${name['m']}.png`),184.082,321.858,{
       width: 358.294,
       height: 140.016,
       keepAspectRatio: false
     })
-    .image(path.resolve(__dirname,`../assets/images/${name['h']}.png`),184.082,599.528,{
+    .image(path.resolve(__dirname,`../images/${name['h']}.png`),184.082,599.528,{
       width: 358.294,
       height: 145.658,
       keepAspectRatio: false
@@ -729,17 +729,17 @@ class Report {
         lineHeight:18
       }
     })
-    .image(path.resolve(__dirname,`../assets/images/${name['i']}.png`),184.082,139.74,{
+    .image(path.resolve(__dirname,`../images/${name['i']}.png`),184.082,139.74,{
       width: 358.294,
       height: 133.834,
       keepAspectRatio: false
     })
-    .image(path.resolve(__dirname,`../assets/images/${name['l']}.png`),184.082,326.748,{
+    .image(path.resolve(__dirname,`../images/${name['l']}.png`),184.082,326.748,{
       width: 358.294,
       height: 130.976,
       keepAspectRatio: false
     })
-    .image(path.resolve(__dirname,`../assets/images/${name['q']}.png`),184.082,612.403,{
+    .image(path.resolve(__dirname,`../images/${name['q']}.png`),184.082,612.403,{
       width: 358.294,
       height: 140,
       keepAspectRatio: false

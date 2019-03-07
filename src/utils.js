@@ -1,3 +1,5 @@
+const crypto = require('crypto')
+
 const toThousandFix = (num, dot = 2) => {
   num = Number.parseFloat(Math.abs(num)).toFixed(dot);
   var str = num.toString();
@@ -22,7 +24,15 @@ const toThousandPrt = (value, dot=2) => {
   return value ? (value * 1).toFixed(dot) : "0";
 };
 
+const genRandomString = function(name,length){
+  const hash = crypto.randomBytes(Math.ceil(length/2))
+          .toString('hex') /** convert to hexadecimal format */
+          .slice(0,length);   /** return required number of characters */
+  return `${name}_${hash}`
+};
+
 module.exports = {
   toThousandFix,
-  toThousandPrt
+  toThousandPrt,
+  genRandomString
 }

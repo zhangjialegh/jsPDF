@@ -1,8 +1,13 @@
 const path = require('path')
 const fs = require('fs')
 const {saveFile,clearFile} = require('./assets/js/File')
+const {genRandomString} = require('./utils')
 const PDFDocument = require('pdfkit')
 const Jimp = require('jimp')
+// const {Pdf} = require('./template/dev-template-pdf')
+// const {Pdf} = require('./template/dev-template-pdf')
+
+const outName =  `${genRandomString('new',6)}.pdf`
 
 const getImage = async (uri) => {
   const res = await Jimp.read(uri)
@@ -14,6 +19,22 @@ const getImage = async (uri) => {
         resolve(re)
       }
     })
+  })
+}
+
+const getFont = (uri) => {
+  return new Promise((resolve,reject) => {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', uri, true);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = () => {
+      if(xhr.status === 200) {
+        resolve(xhr.response)
+      } else {
+        reject(new Error(xhr.responseText))
+      }
+    }
+    xhr.send()
   })
 }
 const fn = async () => {
@@ -29,26 +50,16 @@ const fn = async () => {
     // keywords
 
       const doc = new PDFDocument();
-      doc.pipe(fs.createWriteStream('file.pdf'))
+      doc.pipe(fs.createWriteStream(path.resolve(__dirname,'./output/'+outName)))
       // doc.pipe(fs.createReadStream(path.relative(__dirname,'../file.pdf')))
       /**
        ******************************************************************
        */
-      doc.fontSize(25).text('Here ilslkfs some vector graphics...', 100, 180);
-      const image = await getImage('https://wechat-pics.fangpinduo.com/image/property/53094231/13940383_0_1.jpg')
-      console.log(image,'fffff');
-      doc.image(image,100,100,{height:100,width:100})
-      .text('And here is some wrapped text...', 100, 300)
-      
+      doc.text('sdfsfsdfsfsf')
       doc.end();
-      
       /**
        ******************************************************************
        */
-      console.log('2222222');
-      
-
-
 
 
 
@@ -61,4 +72,9 @@ const fn = async () => {
   }
 }
 
+
+
+
+
 fn()
+console.log('Processing...')

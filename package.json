@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "node scripts/removeFile.js && node scripts/start.js",
     "build": "node scripts/build.js",
-    "mark": "node ./src/water-mark-pdf.js",
-    "new": "node ./src/create-new-pdf.js",
-    "outcharts": "node ./src/out-report-charts.js",
-    "outpdf": "node ./src/out-report-pdf.js",
-    "out": "yarn outcharts && yarn outpdf"
+    "clean": "node scripts/clean.js",
+    "mark": "node src/water-mark-pdf.js && open src/output",
+    "new": "node src/create-new-pdf.js && open src/output",
+    "outcharts": "node src/out-report-charts.js",
+    "outpdf": "node src/out-report-pdf.js && open src/output",
+    "out": "yarn outcharts && yarn outpdf && open src/output"
   },
   "author": "",
   "license": "ISC",
@@ -68,6 +69,7 @@
     "react-app-polyfill": "^0.2.1",
     "react-dev-utils": "^7.0.3",
     "react-dom": "^16.8.2",
+    "readline-sync": "^1.4.9",
     "resolve": "1.10.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.2",

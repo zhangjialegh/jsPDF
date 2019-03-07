@@ -3,8 +3,9 @@ const fs = require('fs')
 const parse = require("csv-parse/lib/sync")
 const process = require('process')
 const HummusRecipe = require('hummus-recipe');
-const Report = require('./reports/Report')
-const {toThousandFix,toThousandPrt} = require('./utils')
+const Report = require('./assets/js/Report')
+const {toThousandFix,toThousandPrt,genRandomString} = require('./utils')
+const {readFile} = require('./assets/js/File')
 
 // 原型添加inserPage方法
 HummusRecipe.prototype.insertPageWeHome = function(src,arr,toIndex=0) {
@@ -153,17 +154,19 @@ function editPageBody() {
   }
 }
 
-console.log('Processing...');
-
 const text = process.argv[2] || 'WeHome_report'  //导出文件名称
 let entryName = 'Templet.pdf'  //引入模板
-let outName = `${text}.pdf`         //导出PDF名称
-const longPDF = path.resolve(__dirname,'./Atlanta_data_report-sample.pdf')  //需要更新等pdf源文件
-const doc = new HummusRecipe(path.resolve(__dirname,entryName), outName);
+const outName =  `${genRandomString(text,6)}.pdf`  //导出PDF名称
 
-
-editPageBody.call(doc)
-.insertPageWeHome(longPDF,[[1,6]])  //将原文件前几页插入
-.insertPageWeHome(longPDF,[[14,16]],7)  //将原文件后几页插入
-.endPDF()
-
+;(async function() {
+    const doc = new HummusRecipe(path.resolve(__dirname,'./template/'+entryName), path.resolve(__dirname,'./output/'+outName));
+    const files = await readFile(path.resolve(__dirname,'./reports'))    //读取该目录下所有文档
+    const longPDF = files[0]   //TODO:选择需要编辑的pdf文档
+    editPageBody.call(doc)
+    .insertPageWeHome(longPDF,[[1,6]])  //将原文件前几页插入
+    .insertPageWeHome(longPDF,[[14,16]],7)  //将原文件后几页插入
+    .endPDF()
+  }
+)()
+ 
+console.log('Processing...');

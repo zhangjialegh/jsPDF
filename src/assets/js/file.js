@@ -27,6 +27,24 @@ const saveFile = (uri, filename) => {
   })
 }
 
+const readFile = (path) => {
+  return new Promise((resolve,reject) => {
+    if( fs.existsSync(path) ) {
+      const files = fs.readdirSync(path)
+      if(files.length) {
+        const filePath = files.map((item) => {
+          return path + '/' +  item
+        })
+        resolve(filePath)
+      } else {
+        reject(new Error(`${path} can not find file!`))
+      }
+    } else {
+      reject(new Error(`${path} can not be found!`))
+    }
+  })
+}
+
 const clearFile = (path) => {
   return new Promise((resolve,reject) => {
     if( fs.existsSync(path) ) {
@@ -47,6 +65,7 @@ const clearFile = (path) => {
 
 module.exports = {
   saveFile,
-  clearFile
+  clearFile,
+  readFile
 }
 

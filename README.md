@@ -13,13 +13,16 @@ yarn start
 yarn new
 
 # 给PDF文档添加水印
-yarn mark <optional>(watermark text)
+yarn mark <optional>(default: 'markwater')
 
 # 根据数据生成图表
 yarn outcharts
 
-# 根目录导出报告PDF
-yarn out
+# 导出报告
+yarn out <optional>(default: 'WeHome_report')
+
+# 清空src目录下的某个文件夹
+yarn clean <optional>(default: 'output')
 ```
 
 
