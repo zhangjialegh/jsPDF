@@ -2771,3 +2771,20 @@
 [ 06/03/2019 16:37:52 ] InputFile::OpenFile, Unexpected Failure. Cannot open file for reading - /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/assets/images/multibar_rental_renturn_perennial.png
 [ 06/03/2019 16:37:53 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 136 was not registered as written. probably means it was not written
 [ 06/03/2019 16:37:53 ] PDFWriter::EndPDF, Could not end PDF
+[ 14/03/2019 15:19:14 ] FreeTypeWrapper::NewFace, unable to load font named /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.ttf with index 0
+[ 14/03/2019 15:19:14 ] FreeTypeWrapper::NewFace, Free Type Error, Code = 8, Message = broken table
+[ 14/03/2019 15:19:14 ] UsedFontsRepository::GetFontForFile, Failed to load font from /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.ttf
+[ 14/03/2019 15:20:47 ] FreeTypeWrapper::NewFace, unable to load font named /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.ttf with index 0
+[ 14/03/2019 15:20:47 ] FreeTypeWrapper::NewFace, Free Type Error, Code = 8, Message = broken table
+[ 14/03/2019 15:20:47 ] UsedFontsRepository::GetFontForFile, Failed to load font from /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.ttf
+[ 14/03/2019 15:22:12 ] FreeTypeWrapper::NewFace, unable to load font named /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.ttf with index 0
+[ 14/03/2019 15:22:12 ] FreeTypeWrapper::NewFace, Free Type Error, Code = 8, Message = broken table
+[ 14/03/2019 15:22:12 ] UsedFontsRepository::GetFontForFile, Failed to load font from /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.ttf
+[ 14/03/2019 15:22:32 ] ObjectsContext::WriteXrefTable, Unexpected Failure. Object of ID = 153 was not registered as written. probably means it was not written
+[ 14/03/2019 15:22:32 ] PDFWriter::EndPDF, Could not end PDF
+[ 14/03/2019 15:27:10 ] FreeTypeWrapper::NewFace, unable to load font named /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.ttf with index 0
+[ 14/03/2019 15:27:10 ] FreeTypeWrapper::NewFace, Free Type Error, Code = 8, Message = broken table
+[ 14/03/2019 15:27:10 ] UsedFontsRepository::GetFontForFile, Failed to load font from /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.ttf
+[ 14/03/2019 15:27:40 ] FreeTypeWrapper::NewFace, unable to load font named /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.TTF with index 0
+[ 14/03/2019 15:27:40 ] FreeTypeWrapper::NewFace, Free Type Error, Code = 8, Message = broken table
+[ 14/03/2019 15:27:40 ] UsedFontsRepository::GetFontForFile, Failed to load font from /Users/zjl/Downloads/jsPDF-1.3.2/jsPDF/src/assets/font/HeiTi-Medium.TTF

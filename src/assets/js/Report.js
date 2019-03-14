@@ -2,7 +2,7 @@ const path = require('path')
 const {name,dataDesc} = require('../../config')
 
 class Report {
-  constructor(doc,initPage=1) {
+  constructor(doc,initPage=2) {
     this.doc = doc
     this.initPage = initPage
   }
@@ -109,6 +109,23 @@ class Report {
       }
     })
     return doc
+  }
+
+  // 封皮
+  editPage1({year,title}) {
+    const doc = this.doc
+    doc.editPage(1)
+    .text(year,52.068,248,{
+      font:'STHeiti-Light',
+      size: 60.6,
+      color:'#000000'
+    })
+    .text(title,52.068,310,{
+      font:'PingFangSC-Medium',
+      size: 40,
+      color:'#000000'
+    })
+    .endPage()
   }
   editPage7({year}) {
     const doc = this.doc
@@ -762,7 +779,8 @@ class Report {
   }
   
  
-  editPdf({page7,page8,page9,page10,page11,page12,page13}) {
+  editPdf({page1,page7,page8,page9,page10,page11,page12,page13}) {
+    this.editPage1(page1)
     this.editPage7(page7)          
     this.editPage8(page8)
     this.editPage9(page9)

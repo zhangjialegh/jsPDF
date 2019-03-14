@@ -31,13 +31,15 @@ function editPageBody() {
       this.registerFont('PingFangSC-Regular',path.resolve(__dirname,'./assets/font/PingFangSC-Regular.ttf'))
       this.registerFont('PingFangSC-Semibold',path.resolve(__dirname,'./assets/font/PingFangSC-Semibold.ttf'))
       this.registerFont('PingFangSC-Medium',path.resolve(__dirname,'./assets/font/PingFangSC-Medium.ttf'))
-      
+      this.registerFont('STHeiti-Light',path.resolve(__dirname,'./assets/font/STHeiti-Light.ttc'))
       /**
        * @参数定义
        * status=> 0: 下跌  1:增长(默认)  -1:无 
        */
 
-      // page7 page8
+      //  封皮
+      const title = '亚特兰大房产报告'
+      // page7 page8 封皮
       const year = 2018
       const month = 12
       // page8     
@@ -99,6 +101,10 @@ function editPageBody() {
       // 编辑PDF逻辑从这里开始
       const report = new Report(this)
       report.editPdf({
+        page1: {
+          year,
+          title
+        },
         page7: {
           year
         },
@@ -163,8 +169,8 @@ const outName =  `${genRandomString(text,6)}.pdf`  //导出PDF名称
     const files = await readFile(path.resolve(__dirname,'./reports'))    //读取该目录下所有文档
     const longPDF = files[0]   //TODO:选择需要编辑的pdf文档
     editPageBody.call(doc)
-    .insertPageWeHome(longPDF,[[1,6]])  //将原文件前几页插入
-    .insertPageWeHome(longPDF,[[14,16]],7)  //将原文件后几页插入
+    .insertPageWeHome(longPDF,[[2,6]],1)  //将原文件前几页插入
+    .insertPageWeHome(longPDF,[[14,16]],8)  //将原文件后几页插入
     .endPDF()
   }
 )()
